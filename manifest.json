@@ -1,0 +1,24 @@
+{
+    "manifest_version": 2,
+    "name": "Still Want These Bookmarks?",
+    "short_name": "Still want?",
+    "version": "0.0.1",
+    "description": "Randomly show some bookmarks, remind you that do you still want them.",
+    "developer": {
+        "name": "sinofp",
+        "url": "https://github.com/sinofp/stillwant"
+    },
+    "icons": {
+        "32": "icons/bone-32.png"
+    },
+    "permissions": [
+        "activeTab",
+        "bookmarks",
+        "tabs"
+    ],
+    "browser_action": {
+        "default_icon": "icons/bone-32.png",
+        "default_title": "Still want?",
+        "default_popup": "popup/choose_bookmark.html"
+    }
+}
