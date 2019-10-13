@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (!itemExists) {
               const newP = document.createElement('p')
               newP.className = 'error'
-              newP.innerHTML =
+              newP.textContent =
                 'Please click the extension icon again to refresh the list.'
               popupList.appendChild(newP)
             }
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (bookmarks.length < 5) {
       const newP = document.createElement('p')
       newP.className = 'error'
-      newP.innerHTML =
+      newP.textContent =
         'Please consider deleting bookmarks after you get more than 5 of them!'
       popupList.appendChild(newP)
     } else {
@@ -53,8 +53,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const the_chosen_one = Math.floor(Math.random() * bookmarks.length)
         const itemDiv = document.createElement('div')
         itemDiv.className = 'item'
-        itemDiv.innerHTML = bookmarks[the_chosen_one].title
-        displayDict[itemDiv.innerHTML] = {
+        itemDiv.textContent = bookmarks[the_chosen_one].title
+        displayDict[itemDiv.textContent] = {
           id: bookmarks[the_chosen_one].id,
           url: bookmarks[the_chosen_one].url
         }
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function () {
         itemDiv.appendChild(hiddenDiv)
         ;['Open', 'Delete'].forEach(function (action) {
           const newButton = document.createElement('button')
-          newButton.innerHTML = action
+          newButton.textContent = action
           hiddenDiv.appendChild(newButton)
         })
 
