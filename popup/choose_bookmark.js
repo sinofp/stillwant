@@ -39,8 +39,9 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function onFulfilled (bookmarkItems) {
-    const bookmarks = bookmarkItems.filter(item => item.type === 'bookmark')
-
+    const bookmarks = bookmarkItems.filter(
+      item => item.type === 'bookmark' && !item.url.startsWith('place:') // place:sort=8&maxResults=10 is Most Visited
+    )
     const displayDict = {}
     if (bookmarks.length < 5) {
       const newP = document.createElement('p')
