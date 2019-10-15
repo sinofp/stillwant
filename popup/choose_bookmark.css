@@ -6,10 +6,19 @@ body {
   width: 300px;
   /* 禁止滚动条出现 */
   overflow: hidden;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .hidden {
   display: none;
+}
+
+.hidden > p {
+  font-size: 60%;
+  color: grey;
+  margin-top: 2%;
+  margin-bottom: 1%;
 }
 
 button {

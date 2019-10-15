@@ -63,9 +63,13 @@ document.addEventListener('DOMContentLoaded', function () {
           url: bookmarks[the_chosen_one].url
         }
         popupList.appendChild(itemDiv)
+
         const hiddenDiv = document.createElement('div')
         hiddenDiv.className = 'hidden'
         itemDiv.appendChild(hiddenDiv)
+        const urlP = document.createElement('p')
+        urlP.textContent = bookmarks[the_chosen_one].url
+        hiddenDiv.appendChild(urlP)
         ;['Open', 'Delete'].forEach(function (action) {
           const newButton = document.createElement('button')
           newButton.textContent = action
