@@ -3,8 +3,10 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 document.addEventListener('DOMContentLoaded', function () {
   const popupList = document.getElementById('popup-content')
+  let bookmarks = []
+  let displayDict = {}
 
-  function listenEvents (displayDict) {
+  function listenEvents () {
     document.addEventListener('click', e => {
       if (e.target.nodeName === 'BUTTON') {
         // BUTTON -> DIV hidden -> DIV item
@@ -18,15 +20,14 @@ document.addEventListener('DOMContentLoaded', function () {
             e.target.parentNode.parentElement.remove()
             const itemExists = document.querySelector('.item')
             if (!itemExists) {
-              const newP = document.createElement('p')
-              newP.className = 'error'
-              newP.textContent =
-                'Please click the extension icon again to refresh the list.'
-              popupList.appendChild(newP)
+              select5AndDisplay()
             }
             break
           case 'Open':
             browser.tabs.create({ url: displayDict[bookmarkTitle].url })
+            break
+          case 'Refresh':
+            select5AndDisplay()
             break
         }
       }
@@ -41,11 +42,10 @@ document.addEventListener('DOMContentLoaded', function () {
     })
   }
 
-  function onFulfilled (bookmarkItems) {
-    const bookmarks = bookmarkItems.filter(
-      item => item.type === 'bookmark' && !item.url.startsWith('place:') // place:sort=8&maxResults=10 is Most Visited
-    )
-    const displayDict = {}
+  function select5AndDisplay () {
+    while (popupList.firstChild) {
+      popupList.removeChild(popupList.firstChild)
+    }
     if (bookmarks.length < 5) {
       const newP = document.createElement('p')
       newP.className = 'error'
@@ -79,8 +79,14 @@ document.addEventListener('DOMContentLoaded', function () {
         bookmarks.splice(the_chosen_one, 1)
       }
     }
+  }
 
-    listenEvents(displayDict)
+  function onFulfilled (bookmarkItems) {
+    bookmarks = bookmarkItems.filter(
+      item => item.type === 'bookmark' && !item.url.startsWith('place:') // place:sort=8&maxResults=10 is Most Visited
+    )
+    select5AndDisplay()
+    listenEvents()
   }
 
   function onRejected (error) {
