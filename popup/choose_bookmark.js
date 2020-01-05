@@ -85,6 +85,11 @@ document.addEventListener('DOMContentLoaded', function () {
     bookmarks = bookmarkItems.filter(
       item => item.type === 'bookmark' && !item.url.startsWith('place:') // place:sort=8&maxResults=10 is Most Visited
     )
+    // truncate super long title
+    bookmarkItems.forEach(bookmark => {
+      if (bookmark.title.length > 100)
+        bookmark.title = bookmark.title.substr(0, 100) + '…'
+    })
     select5AndDisplay()
     listenEvents()
   }
