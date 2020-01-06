@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "Still Want These Bookmarks?",
     "short_name": "Still want?",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "Randomly show some bookmarks, remind you that do you still want them.",
     "developer": {
         "name": "sinofp",

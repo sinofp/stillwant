@@ -4,31 +4,29 @@
 document.addEventListener('DOMContentLoaded', function () {
   const popupList = document.getElementById('popup-content')
   let bookmarks = []
-  let displayDict = {}
 
   function listenEvents () {
     document.addEventListener('click', e => {
       if (e.target.nodeName === 'BUTTON') {
-        // BUTTON -> DIV hidden -> DIV item
-        const bookmarkTitle =
-          e.target.parentNode.parentNode.firstChild.nodeValue
-        console.log(bookmarkTitle)
-        console.log(e.target.textContent)
-        switch (e.target.textContent) {
-          case 'Delete':
-            browser.bookmarks.remove(displayDict[bookmarkTitle].id)
-            e.target.parentNode.parentElement.remove()
-            const itemExists = document.querySelector('.item')
-            if (!itemExists) {
-              select5AndDisplay()
-            }
-            break
-          case 'Open':
-            browser.tabs.create({ url: displayDict[bookmarkTitle].url })
-            break
-          case 'Refresh':
-            select5AndDisplay()
-            break
+        if ('Refresh' == e.target.textContent) {
+          select5AndDisplay()
+        } else {
+          const bookmarkDiv = document.getElementById(
+            parseInt(e.target.getAttribute('id')) + 'bookmark'
+          )
+          switch (e.target.textContent) {
+            case 'Delete':
+              browser.bookmarks.remove(bookmarkDiv.dataset.bookmarkId)
+              bookmarkDiv.remove()
+              const itemExists = document.querySelector('.item')
+              if (!itemExists) {
+                select5AndDisplay()
+              }
+              break
+            case 'Open':
+              browser.tabs.create({ url: bookmarkDiv.dataset.bookmarkUrl })
+              break
+          }
         }
       }
     })
@@ -37,7 +35,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/user_interface/Popups#Popup_resizing
     const wastediv = document.createElement('div')
     document.addEventListener('mouseout', e => {
-      console.log(`mouseout: ${e.target.nodeName}`)
       popupList.appendChild(wastediv)
     })
   }
@@ -58,10 +55,11 @@ document.addEventListener('DOMContentLoaded', function () {
         const itemDiv = document.createElement('div')
         itemDiv.className = 'item'
         itemDiv.textContent = bookmarks[the_chosen_one].title
-        displayDict[itemDiv.textContent] = {
-          id: bookmarks[the_chosen_one].id,
-          url: bookmarks[the_chosen_one].url
-        }
+        // button id=0Open -> div id=0bookmark
+        itemDiv.setAttribute('id', i + 'bookmark')
+        // html5 data attributes
+        itemDiv.setAttribute('data-bookmark-id', bookmarks[the_chosen_one].id)
+        itemDiv.setAttribute('data-bookmark-url', bookmarks[the_chosen_one].url)
         popupList.appendChild(itemDiv)
 
         const hiddenDiv = document.createElement('div')
@@ -70,9 +68,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const urlP = document.createElement('p')
         urlP.textContent = bookmarks[the_chosen_one].url
         hiddenDiv.appendChild(urlP)
-        ;['Open', 'Delete'].forEach(function (action) {
+        ;['Open', 'Delete'].forEach(action => {
           const newButton = document.createElement('button')
           newButton.textContent = action
+          newButton.setAttribute('id', i + action)
           hiddenDiv.appendChild(newButton)
         })
 
