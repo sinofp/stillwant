@@ -3,11 +3,12 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 html,
 body {
-  width: 300px;
+  width: 80ch;
   /* 禁止滚动条出现 */
   overflow: hidden;
   margin-top: 0;
   margin-bottom: 0;
+  font-size: 62.5%;
 }
 
 .hidden {
@@ -15,10 +16,10 @@ body {
 }
 
 .hidden > p {
-  font-size: 60%;
+  font-size: 1.2rem;
   color: grey;
-  margin-top: 2%;
-  margin-bottom: 1%;
+  margin-top: 0.3rem;
+  margin-bottom: 0.1rem;
 }
 
 button {
@@ -33,19 +34,23 @@ button:hover {
 }
 
 .item {
-  margin: 3% auto;
-  padding: 4px;
+  height: 2.7rem;
+  font-size: 1.8rem;
+  margin: 0.8rem auto;
+  padding: 0.4rem;
   text-align: center;
-  font-size: 18px;
   background-color: #e5f2f2;
-  overflow: hidden;
+
+  width: 100%;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .item:hover {
+  font-size: 1.6rem;
   background-color: #cff2f2;
-  overflow: visible;
-  white-space: normal;
+  height: 6.3rem;
 }
 
 /* https://stackoverflow.com/a/17393262 */
@@ -55,13 +60,13 @@ button:hover {
 
 .error {
   text-align: center;
-  font-size: 18px;
+  font-size: 1.8rem;
 }
 
 #refresh {
-  margin: 3% auto;
-  padding: 4px;
-  font-size: 14px;
+  margin: 0.8rem auto;
+  padding: 0.4rem;
+  font-size: 1.4rem;
   text-align: center;
   background-color: #cff2f2;
 }
