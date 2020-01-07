@@ -55,6 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const itemDiv = document.createElement('div')
         itemDiv.className = 'item'
         itemDiv.textContent = bookmarks[the_chosen_one].title
+        itemDiv.setAttribute('title', bookmarks[the_chosen_one].title)
         // button id=0Open -> div id=0bookmark
         itemDiv.setAttribute('id', i + 'bookmark')
         // html5 data attributes
@@ -67,11 +68,14 @@ document.addEventListener('DOMContentLoaded', function () {
         itemDiv.appendChild(hiddenDiv)
         const urlP = document.createElement('p')
         urlP.textContent = bookmarks[the_chosen_one].url
+        urlP.setAttribute('title', bookmarks[the_chosen_one].url)
         hiddenDiv.appendChild(urlP)
         ;['Open', 'Delete'].forEach(action => {
           const newButton = document.createElement('button')
           newButton.textContent = action
           newButton.setAttribute('id', i + action)
+          if ('Open' == action)
+            newButton.setAttribute('title', bookmarks[the_chosen_one].url)
           hiddenDiv.appendChild(newButton)
         })
 
@@ -84,11 +88,6 @@ document.addEventListener('DOMContentLoaded', function () {
     bookmarks = bookmarkItems.filter(
       item => item.type === 'bookmark' && !item.url.startsWith('place:') // place:sort=8&maxResults=10 is Most Visited
     )
-    // truncate super long title
-    bookmarkItems.forEach(bookmark => {
-      if (bookmark.title.length > 100)
-        bookmark.title = bookmark.title.substr(0, 100) + '…'
-    })
     select5AndDisplay()
     listenEvents()
   }
