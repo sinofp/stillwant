@@ -2,6 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 document.addEventListener('DOMContentLoaded', function () {
+  const isFirefox = navigator.userAgent.includes('Firefox')
   const popupList = document.getElementById('popup-content')
   let bookmarks = []
 
@@ -24,19 +25,25 @@ document.addEventListener('DOMContentLoaded', function () {
               }
               break
             case 'Open':
-              browser.tabs.create({ url: bookmarkDiv.dataset.bookmarkUrl })
+              browser.tabs.create({
+                url: bookmarkDiv.dataset.bookmarkUrl,
+                // Chrome will auto close the popup if active is true
+                active: isFirefox ? true : false
+              })
               break
           }
         }
       }
     })
 
-    // create some *DOM mutations* to force firefox resize popup window
-    // https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/user_interface/Popups#Popup_resizing
-    const wastediv = document.createElement('div')
-    document.addEventListener('mouseout', e => {
-      popupList.appendChild(wastediv)
-    })
+    if (isFirefox) {
+      // create some *DOM mutations* to force firefox resize popup window
+      // https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/user_interface/Popups#Popup_resizing
+      const wastediv = document.createElement('div')
+      document.addEventListener('mouseout', e => {
+        popupList.appendChild(wastediv)
+      })
+    }
   }
 
   function select5AndDisplay () {
@@ -86,7 +93,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function onFulfilled (bookmarkItems) {
     bookmarks = bookmarkItems.filter(
-      item => item.type === 'bookmark' && !item.url.startsWith('place:') // place:sort=8&maxResults=10 is Most Visited
+      item => item.url != undefined && !item.url.startsWith('place:')
+      //       ↑ chrome has no item.type   ↑ place:sort=8&maxResults=10 is Most Visited
     )
     select5AndDisplay()
     listenEvents()
