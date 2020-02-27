@@ -1,14 +1,14 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
-html,
-body {
-  width: 80ch;
+html {
   /* 禁止滚动条出现 */
   overflow: hidden;
-  margin-top: 0;
-  margin-bottom: 0;
   font-size: 62.5%;
+}
+
+body {
+  width: 30rem;
 }
 
 .hidden {
@@ -40,8 +40,7 @@ button:hover {
   padding: 0.4rem;
   text-align: center;
   background-color: #e5f2f2;
-
-  width: 100%;
+  width: inherit;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
