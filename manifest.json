@@ -2,12 +2,10 @@
     "manifest_version": 2,
     "name": "Still Want These Bookmarks?",
     "short_name": "Still want?",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "description": "Randomly show some bookmarks, remind you that do you still want them.",
-    "developer": {
-        "name": "sinofp",
-        "url": "https://github.com/sinofp/stillwant"
-    },
+    "author": "sinofp",
+    "homepage_url": "https://github.com/sinofp/stillwant",
     "icons": {
         "32": "icons/bone-32.png"
     },
