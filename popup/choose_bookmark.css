@@ -1,10 +1,20 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
+:root {
+  --white: #fafafa; /* back ground */
+  --light-grey: #bdbdbd; /* button */
+  --grey: #757575; /* url */
+  --light-cyan: #e0f7fa; /* item */
+  --cyan: #b2ebf2; /* item:hover, refresh*/
+  --dark-cyan: #80deea; /* refresh:hover */
+}
+
 html {
   /* 禁止滚动条出现 */
   overflow: hidden;
   font-size: 62.5%;
+  background-color: var(--white);
 }
 
 body {
@@ -17,20 +27,20 @@ body {
 
 .hidden > p {
   font-size: 1.2rem;
-  color: grey;
+  color: var(--grey);
   margin-top: 0.3rem;
   margin-bottom: 0.1rem;
 }
 
 button {
-  background-color: #cff2f2;
+  background-color: var(--cyan);
   cursor: pointer;
   border: none;
 }
 
 button:hover {
-  color: white;
-  background-color: #9fb7bd;
+  color: var(--white);
+  background-color: var(--light-grey);
 }
 
 .item {
@@ -39,7 +49,7 @@ button:hover {
   margin: 0.8rem auto;
   padding: 0.4rem;
   text-align: center;
-  background-color: #e5f2f2;
+  background-color: var(--light-cyan);
   width: inherit;
   white-space: nowrap;
   overflow: hidden;
@@ -48,7 +58,7 @@ button:hover {
 
 .item:hover {
   font-size: 1.6rem;
-  background-color: #cff2f2;
+  background-color: var(--cyan);
   height: 6.3rem;
 }
 
@@ -67,19 +77,19 @@ button:hover {
   padding: 0.4rem;
   font-size: 1.4rem;
   text-align: center;
-  background-color: #cff2f2;
+  background-color: var(--cyan);
 }
 
 #refresh button {
-  background-color: #b9f2f2;
+  background-color: var(--dark-cyan);
 }
 
 #refresh button:hover {
-  background-color: #9fb7bd;
+  background-color: var(--light-grey);
 }
 
 #refresh:hover {
-  background-color: #b9f2f2;
+  background-color: var(--dark-cyan);
 }
 
 #refresh:hover .hidden {
