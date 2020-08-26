@@ -7,7 +7,8 @@
     "author": "sinofp",
     "homepage_url": "https://github.com/sinofp/stillwant",
     "icons": {
-        "32": "icons/bone-32.png"
+        "32": "icons/bone-32.png",
+        "128": "icons/bone-128.png"
     },
     "permissions": [
         "activeTab",
